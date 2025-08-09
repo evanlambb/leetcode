@@ -9,9 +9,9 @@ class Solution(object):
             return -1
 
         elif target > lst[middle]: ## search to the right of middle
-            return find(self, middle + 1, end, lst, target)
+            return self.find(self, middle + 1, end, lst, target)
         else: ## search to the left of middle
-            return find(self, start, middle - 1, lst, target)
+            return self.find(self, start, middle - 1, lst, target)
 
 
     # recursive binary search
