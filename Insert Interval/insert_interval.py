@@ -16,7 +16,7 @@ class Solution:
 
         return newLst
 
-    def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
+    def insert(self, intervals, newInterval):
         newLst = []
        
         if newInterval[1] < intervals[0][1]:
@@ -28,8 +28,13 @@ class Solution:
             elif i < len(intervals) - 1 and intervals[i][1] < newInterval[0] and newInterval[1] >= intervals[i][1]: #insert in between
                 return self.mergeForward(newInterval[0], newInterval[1], intervals, i, newLst)
             else:
-                newList.append(intervals[i])
+                newLst.append(intervals[i])
 
         # insert at the end case.
         newLst.append(newInterval)
         return newLst
+    
+
+if __name__ == "__main__":
+    sol = Solution()
+    print(sol.insert([[1,3],[6,9]], [2,5]))
