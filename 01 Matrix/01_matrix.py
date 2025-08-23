@@ -1,3 +1,6 @@
+from typing import List
+from collections import deque
+
 class Solution:
     # similar to walls and gates, and rotting oranges
     # multi source BFS
