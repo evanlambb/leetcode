@@ -22,6 +22,4 @@ class Solution:
 
 
     def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
-        # create a new node, set the value to the proper value, and then call cloneGraph on each of the neighbours, need to keep track of visited as well?
-
         return self.cloneRec(node, {})
