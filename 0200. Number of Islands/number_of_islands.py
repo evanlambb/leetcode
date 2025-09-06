@@ -4,14 +4,8 @@ class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
         rows = len(grid)
         cols = len(grid[0])
-        land = 0
         islands = 0
         seen = set()
-
-        for i in range(rows):
-            for j in range(cols):
-                if grid[i][j] == "1":
-                    land += 1
 
         # at this point, we know how many lands we are looking for, now we just go and find them all... 
         def dfs(r, c):
