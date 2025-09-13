@@ -204,3 +204,4 @@ return distances
 - Identical to Dijkstra's except instead of a priority queue, a double ended queue can be used, and when an edge of weight 0 is encounter, append it to the left, when an edge of weight 1 is encounter, append it to the right
 # Possible
 	- Dinic
+	
