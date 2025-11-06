@@ -4,3 +4,4 @@
 - Trapping Rain Water
 - Largest Rectangle in a Histogram
 - Find Median From Data Stream
+- Accounts Merge
