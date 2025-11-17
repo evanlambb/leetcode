@@ -3,10 +3,10 @@ from typing import List
 class Solution:
 
     def encode(self, strs: List[str]) -> str:
-        ans = ""
+        parts = []
         for string in strs:
-            item = str(len(string)) + "." + string
-            ans = ans + item
+            parts.append(str(len(string)) + "." + string)
+        return "".join(parts)
 
         return ans
     def decode(self, s: str) -> List[str]:
