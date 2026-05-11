@@ -12,7 +12,6 @@ class BSTIterator:
         while node:
             self.s.append(node)
             node = node.left
-        print(self.s)
 
     def next(self) -> int:
         root = self.s.pop()
