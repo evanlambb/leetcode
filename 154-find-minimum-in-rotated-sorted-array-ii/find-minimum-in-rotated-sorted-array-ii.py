@@ -1,11 +1,8 @@
 class Solution:
     def findMin(self, nums: List[int]) -> int:
-        print(nums)
         l, r = 0, len(nums) - 1
-
         while l <= r:
             mid = l + (r - l) // 2
-            print(nums[mid])
             if nums[l] < nums[r] or l == r:
                 return nums[l]
             else: # we have a rotation still...
