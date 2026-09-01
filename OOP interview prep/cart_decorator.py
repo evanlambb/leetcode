@@ -38,6 +38,8 @@ class CartPricing (ABC):
 
     def calculate_final_price(self) -> float: 
       return self.calculate_total() * 1.13 + self.get_shipping()
+
+
 # BaseCart inherits from CartPricing, and is the default cart behaviour  
 class BaseCart (CartPricing):
     def __init__(self, items : List[item], shipping : int):
@@ -48,7 +50,6 @@ class BaseCart (CartPricing):
         total = 0
         for item in self.items:
             total += item.price
-        print(total)
         return total
     def get_items(self) -> List[Item]:
         return self.items
@@ -67,11 +68,7 @@ class CartDecorator (CartPricing):
         return self.cart_pricing.get_items()
 
     def calculate_total(self): # this then overrides the default behaviour of the CartPricing class. 
-        total = 0
-        for item in self.items:
-            total += item.price
-        print(total)
-        return total
+      return self.cart_pricing.calculate_total()
     def get_shipping(self) -> float:
       return self.cart_pricing.get_shipping()
 
@@ -80,31 +77,29 @@ class CartDecorator (CartPricing):
 # CartDiscount inherits CartDecorator and takes a discount as a percentage (e.g. for 20% off, discount = 0.20)
 class CartDiscount (CartDecorator):
     def __init__(self, cart_pricing : CartPricing, discount : float):
-        self.cart_pricing = cart_pricing
+        super().__init__(cart_pricing) # We need to call the superclass ctor
         self.discount = discount
     def calculate_total(self):
-        return self.cart_pricing.calculate_total() * (1- self.discount)
+        return super().calculate_total() * (1- self.discount)
     
 
 # ItemDiscount inherits CartDecorator
 class ItemDiscount (CartDecorator):
     def __init__(self, cart_pricing : CartPricing, item_id : str, discount : double):
-        self.cart_pricing = cart_pricing
+        super().__init__(cart_pricing)
         self.item_id = item_id
         self.discount = discount
     def calculate_total(self):
         for item in self.cart_pricing.get_items():
           if item.id == self.item_id:
-            return (self.cart_pricing.calculate_total() - self.discount)
+            return (super().calculate_total() - self.discount)
         # the discounted item was not found
-        return self.cart_pricing.calculate_total()
+        return super().calculate_total()
 
 
 # FreeShipping inherits CartDecorator
 class FreeShipping (CartDecorator):
-    def __init__(self, cart_pricing : CartPricing):
-      self.cart_pricing = cart_pricing
-    def get_shipping() -> float:
+    def get_shipping(self) -> float:
       return 0.0
     # def calculate_total(self):
     #     return cart_pricing.calculate_total() # total stays the same
