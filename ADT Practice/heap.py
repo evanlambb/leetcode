@@ -1,10 +1,6 @@
 from typing import List
 
 class Heap:
-    # Fix 1: Avoid mutable default arguments
-    def __init__(self, h: List[int] = None):
-        self.h = h if h is not None else []
-
     def empty(self) -> bool:
         return len(self.h) == 0
 
@@ -25,19 +21,20 @@ class Heap:
         self.check_up(len(self.h) - 1)
 
     def check_up(self, ind: int):
-        if ind == 0:
-            return 
+        while ind != 0:
             
-        num = self.h[ind]
-        parent_ind = self.parent(ind)
-        parent = self.h[parent_ind]
-        
-        if parent < num:
-            # Swap
-            self.h[ind], self.h[parent_ind] = self.h[parent_ind], self.h[ind]
+            num = self.h[ind]
+            parent_ind = self.parent(ind)
+            parent = self.h[parent_ind]
             
-            # Fix 2: Added 'self.' to recursion
-            self.check_up(parent_ind)
+            if parent < num:
+                # Swap
+                self.h[ind], self.h[parent_ind] = self.h[parent_ind], self.h[ind]
+                
+                # Fix 2: Added 'self.' to recursion
+                ind = parent_ind
+            else:
+                return
 
     # Fix 3: Fixed indentation and implemented the method
     def check_down(self, ind: int):
@@ -76,3 +73,14 @@ class Heap:
             
         # Fix 4: Return the popped value
         return ans
+
+    
+    # Fix 1: Avoid mutable default arguments
+    def __init__(self, h: List[int] = None):
+        self.h = h
+        if h != None:
+            for i in range(self.parent(len(h) - 1), -1 ,-1):
+                self.check_down(i)
+        print(self.h)
+
+h = Heap([10, 18, , 124, 23,45 ,75, , 23, 12])
