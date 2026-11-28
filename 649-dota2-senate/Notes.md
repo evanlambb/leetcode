@@ -1,0 +1,1 @@
+<h2>Dota2 Senate Notes</h2><hr>[ Time taken: 16m 40s ]
